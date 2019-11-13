@@ -15,7 +15,13 @@ class CreateQuitsTable extends Migration
     {
         Schema::create('quits', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title');
+            $table->dateTime('from');
+            $table->unsignedBigInteger('user_id')->index();
+            $table->decimal('amount', 8, 2);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
